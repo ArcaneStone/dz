@@ -1,0 +1,67 @@
+
+using System;
+
+namespace ConsoleApp1
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            string Evil = "Зло";
+            string Good = "Добро";
+            string Neutral = "Нейтралитет";
+
+            int attack = 15;
+            int armour;
+            int Faction_Selection;
+            int Enemy_Faction_Selection;
+            int health;
+            int damage;
+            int Max_Armour = 100;
+
+            float Damage_Reduction_Percentage = 0.5f;
+
+            Console.WriteLine("Добро пожаловать в нашу игру!");
+
+            Console.WriteLine("Пожалуйста, введите к какой фракции относится ваш юнит, в ответе укажите цифру от 1 до 3");
+
+            Console.WriteLine($"1-{Evil},2-{Good},3-{Neutral}.");
+            Faction_Selection = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Пожалуйста, введите количество брони у вашего юнита от 0 до 100");
+            armour = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Пожалуйста введите ХП вашего юнита от 0 до 100");
+            health = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Отлично с этим разобрались, теперь укажите из какой фракции будет атакующий вас юнит");
+
+            Console.WriteLine($"1-{Evil},2-{Good},3-{Neutral}.");
+            Enemy_Faction_Selection = Convert.ToInt32(Console.ReadLine());
+
+            Console.WriteLine("Вы молодец!Теперь давайте посмотрим как проходит ваш бой!");
+
+            if((Faction_Selection == 1) && (Enemy_Faction_Selection == 1))
+            {
+                attack = attack * Convert.ToInt32(Damage_Reduction_Percentage);
+            }
+            if ((Faction_Selection == 1) && (Enemy_Faction_Selection == 2))
+            {
+                attack = attack + (attack * Convert.ToInt32(Damage_Reduction_Percentage));
+            }
+            if((Faction_Selection == 2) && (Enemy_Faction_Selection == 1))
+            {
+                attack = attack + (attack * Convert .ToInt32(Damage_Reduction_Percentage));
+            }
+            if((Faction_Selection == 2) && (Enemy_Faction_Selection == 2))
+            {
+                attack = attack * Convert.ToInt32(Damage_Reduction_Percentage);
+            }
+
+            damage = attack * ((Max_Armour - armour) / Max_Armour);
+            health -= damage;
+
+            Console.WriteLine($"После атаки противника у вас осталось {health} ХП");
+        }
+    }
+}
